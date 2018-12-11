@@ -1,0 +1,36 @@
+{% extends 'layout.html' %}
+{% block body %}
+{% from "/includes/_formhelpers.html" import render_field %}
+<h1>Ubah Data Petugas</h1>
+<div class="column-left">
+    <form action="" method="POST" enctype="multipart/form-data">
+        <div class="form-group">{{ render_field(form.nama ,class_="form-control") }}
+        </div>
+        <div class="form-group">{{ render_field(form.alamat ,class_="form-control") }}
+        </div>
+        <div class="form-group">{{ render_field(form.telpon ,class_="form-control") }}
+        </div>
+        <div class="form-group">{{ render_field(form.password ,class_="form-control") }}
+        </div>
+        <div class="input-group" style="margin-bottom: 15px">
+            <span class="input-group-addon">Pilih Status</span>
+            <select id="status" name="status" class="selectpicker form-control" value="{{ result[9] }}">
+                {% for s in datastatus %}
+                <option value="{{ s.status }}" {% if result[4] == s.status %}selected="true" {% endif %}>{{ s.status }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="input-group" style="margin-bottom: 15px">
+            <span class="input-group-addon">Pilih Rbm</span>
+            <select id="rbm" name="rbm" class="selectpicker form-control" value="{{ result[9] }}">
+                {% for i in datarbm %}
+                <option value="{{ i.rbm }}" {% if result[9] == i.rbm %}selected="true" {% endif %}>{{ i.rbm }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <p>
+            <input type="submit" value="Ubah Data" class="waves-effect waves-light btn">
+        </p>
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Home</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link type="text/css" rel="stylesheet" media="screen" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='fontawesome-free-5.1.0-web/css/solid.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='fontawesome-free-5.1.0-web/css/fontawesome.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <nav class="nav-wrapper">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <p class="brand-logo left" style="font-size: 25px; margin-top: 10px">TUSBUNG</p>
+            </div>
+            <ul id="nav-mobile" class="right hide-on-med-and-down" style="font-size: 10px">
+                <li><a href="{{ url_for('kirimPesan') }}" style="font-size: 15px">Kirim Pesan</a></li>
+                <li><a href="{{ url_for('pemutusan') }}" style="font-size: 15px">Pemutusan</a></li>
+                <li><a href="{{ url_for('penyambungan') }}" style="font-size: 15px">Penyambungan</a></li>
+                <li><a href="{{ url_for('viewKar') }}" style="font-size: 15px">Kelola Akun</a></li>
+                <li><a href="/logout" style="font-size: 15px">Logout</a></li>
+            </ul>
+        </div>
+    </nav>
+    <div class="container">
+        {% include 'includes/_messages.html' %}
+        {% block body %}{% endblock %}
+    </div>
+
+    <!-- JS -->
+    <script type="text/javascript" src="{{ url_for('static', filename='jquery-3.3.1.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='bootstrap.min.js') }}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js.js') }}"></script>
+
+</body>
+</html>

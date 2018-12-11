@@ -1,0 +1,22 @@
+{% extends 'layout.html' %} {% block body %} {% from "/includes/_formhelpers.html" import render_field %}
+<h1>Menu Kirim Pesan</h1>
+
+<form action="" method="post">
+    <div class="form-group">
+        <input type="text" class="form-control" placeholder="Username" aria-label="Nomor HP Tujuan" value="+62" name="nomor">
+    </div>
+
+    <div class="form-group">
+        <label for="exampleFormControlTextarea1">Isi Pesan</label>
+        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="pesan"></textarea>
+    </div>
+    <div id="b-login">
+        <input type="submit" value="Kirim" class="btn btn-primary" style="width: 200px">
+    </div>
+</form>
+
+<!-- <script>
+    var jwt = "{{result}}".slice(6);
+    localStorage.setItem("token", jwt)
+</script> -->
+{% endblock %}

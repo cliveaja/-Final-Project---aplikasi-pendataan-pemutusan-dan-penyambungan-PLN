@@ -1,0 +1,51 @@
+{% extends 'layout.html' %}
+{% block body %}
+{% from "/includes/_formhelpers.html" import render_field %}
+<h1>List Petugas</h1>
+<div id="button-container">
+    <form action="{{ url_for('tkaryawan') }}" method="GET">
+        <input type="submit" value="Tambah Petugas" class="waves-effect waves-light btn">
+    </form>
+</div>
+
+<div class="card-body">
+    <div style="width:auto; height:417px; overflow:auto;">
+        <table class="responsive-table" id="mydata">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nama</th>
+                    <th>Alamat</th>
+                    <th>No Hp</th>
+                    <th>Status</th>
+                    <th>RBM</th>
+                    <th>Aksi</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in view %}
+                <tr>
+                    <td>{{item[1]}}</td>
+                    <td>{{item[2]}}</td>
+                    <td>{{item[3]}}</td>
+                    <td>{{item[5]}}</td>
+                    <td>{{item[4]}}</td>
+                    <td>{{item[9]}}</td>
+                    <td>
+                        <div class="form-aksi">
+                            <form action="{{ url_for('edit_Petugas', petugas_id=item[1]) }}" method="GET">
+                                <input type="submit" value="Edit" class="btn waves-effect waves-light">
+                            </form>
+                            <form action="{{ url_for('hapusPetugas', petugas_id=item[1]) }}" method="POST">
+                                <input type="hidden" value="DELETE" name="_method" class="button-aksi" id="b-del">
+                                <input type="submit" value="Delete" class="button-aksi" id="b-del">
+                            </form>
+                        </div>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

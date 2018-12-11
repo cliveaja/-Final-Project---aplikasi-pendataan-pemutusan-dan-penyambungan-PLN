@@ -1,0 +1,48 @@
+{% extends 'layout.html' %}
+{% block body %}
+{% from "/includes/_formhelpers.html" import render_field %}
+<h1>Tambah Petugas</h1>
+<form action="" method="POST" enctype="multipart/form-data">
+
+    <div class="input-container">
+        <input type="text" placeholder="id" id="id" name="id" required="required" value="{{request.form.id}}" />
+        <div class="bar"></div>
+    </div>
+    <div class="input-container">
+        <input type="text" placeholder="nama" id="nama" name="nama" required="required" value="{{request.form.nama}}" />
+        <div class="bar"></div>
+    </div>
+    <div class="input-container">
+        <input type="text" placeholder="alamat" id="alamat" name="alamat" required="required" value="{{request.form.alamat}}" />
+        <div class="bar"></div>
+    </div>
+    <div class="input-container">
+        <input type="text" placeholder="telpon" id="telpon" name="telpon" required="required" value="{{request.form.telpon}}" />
+        <div class="bar"></div>
+    </div>
+    <div class="input-container">
+        <input type="text" placeholder="password" id="password" name="password" required="required" value="{{request.form.password}}" />
+        <div class="bar"></div>
+    </div>
+    <div class="input-group" style="margin-bottom: 15px">
+        <span class="input-group-addon">Pilih Status</span>
+        <select name="status" class="selectpicker form-control">
+            {% for i in status %}
+            <option value="{{ i.status }}">{{ i.status }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <div class="input-group" style="margin-bottom: 15px">
+        <span class="input-group-addon">Pilih RBM</span>
+        <select name="rbm" class="selectpicker form-control">
+            {% for k in datarbm %}
+            <option value="{{ k.datarbm }}">{{ k.datarbm }}</option>
+            {% endfor %}
+        </select>
+    </div>
+
+    <p>
+        <input type="submit" value="Simpan" class="waves-effect waves-light btn">
+    </p>
+</form>
+{% endblock %}

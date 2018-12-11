@@ -1,0 +1,144 @@
+{% extends 'layout.html' %} {% block body %} {% from "/includes/_formhelpers.html" import render_field %}
+<h1>Menu Pemutusan</h1>
+<form action="{{ url_for('pemutusan') }}" method=post enctype=multipart/form-data>
+    <input type=file name=file>
+    <div class="form-group" style="margin-top: 10px; margin-bottom: 10px">
+        <input class="waves-effect waves-light btn" style="margin-top: 10px; margin-bottom: 10px" type=submit value="import">
+        <!-- <div class="input-group">
+            <span class="input-group-addon">Pilih Area</span>
+            <select name="area" class="selectpicker form-control" id="area" onchange="ocg()">
+                <option value="" selected disabled>Pilih Area</option>
+                {% for o in data %}
+                <option value="{{ o.area }}">{{ o.area }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="input-group" style="margin-top: 10px">
+            <span class="input-group-addon">Pilih Petugas</span>
+            <select class="form-control" type="text" name="petugas" id="petugas">
+                <option value="" selected disabled>Pilih Petugas</option>
+            </select>
+        </div> -->
+
+    </div>
+</form>
+
+<h5 style="font-weight: bold">EKSEKUSI</h5>
+<div>
+    <p style="font-weight: bold">{{eksekusi}}</p>
+</div>
+<div class="card-body">
+        <div style="width:auto; height:417px; overflow:auto;">
+            <table class="table" id="mydata">
+                <thead>
+                    <tr>
+                        <th>Id Pelanggan</th>
+                        <th>Nama</th>
+                        <th>Alamat</th>
+                        <th>Tarif</th>
+                        <th>Daya</th>
+                        <th>RBM</th>
+                        <th>Langkah</th>
+                        <th>Lembar</th>
+                        <th>Tagihan</th>
+                        <th>Keterangan</th>
+                        <th>Status</th>
+                        <th>Aksi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in views %}
+                    <tr class="clickable" onclick="getFirstCol()">
+                        <td>{{item[1]}}</td>
+                        <td>{{item[2]}}</td>
+                        <td>{{item[3]}}</td>
+                        <td>{{item[4]}}</td>
+                        <td>{{item[5]}}</td>
+                        <td>{{item[6]}}</td>
+                        <td>{{item[7]}}</td>
+                        <td>{{item[8]}}</td>
+                        <td>{{item[9]}}</td>
+                        <td>{{item[11]}}</td>
+                        <td>
+                            {% if (item[10] == 'true') %}
+                            <i class="fa fa-check-circle"></i>
+                            {% else %}
+                            <i class="fa fa-minus-circle"></i>                       
+                            {% endif %}
+                        </td>
+                        <td>{{item[13]}}</td>
+                        <td>
+                            <button type="button" class="waves-effect waves-light btn modal-trigger" data-toggle="modal" data-target="#{{item[1]}}" style="margin: 7px">
+                                Keterangan
+                            </button>
+                        </td>
+                    </tr>
+                    <!-- Modal -->
+                    <div class="modal" id="{{item[1]}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Foto</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body" style="position: relative">
+                                    <img src="http://192.168.43.94:5000/{{item[12]}}" alt="" style="width: 100%">
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Keluar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <form action="{{ url_for('hapusDataPemutusan') }}" method="POST">
+            <input type="hidden" value="Hapus" class="button-aksi" id="b-del">
+            <input type="submit" value="Hapus" class="button-aksi" id="b-del">
+        </form>
+</div>
+
+<script>
+    function ocg() {
+        var area = document.getElementById('area');
+        // alert(area.value)
+        $.ajax({
+            type: "GET",
+            url: "http://192.168.43.94:5000/listPetugas?area=" + area.value,
+            success: function (data) {
+                var select = document.getElementById("petugas");
+                select.innerHTML = "<option value='' selected disabled>Pilih Petugas</option>";
+                if (data) {
+                    data = JSON.parse(data)
+                    data.forEach(element => {
+                        var option = document.createElement('option');
+                        option.text = element[2];
+                        option.value = element[1];
+                        select.appendChild(option);
+                    });
+                }
+            }
+        }).done(function (res) {
+            console.log("oh yea");
+        });
+
+    }
+
+    var rows = document.getElementById("mydata").getElementsByTagName("tr");
+    function getFirstCol(row){
+        alert(row.getElementsByTagName('td')[0].innerHTML);
+    }
+
+
+    // function test($i) {
+    // test1 = $i;
+
+
+    // alert(test1);
+    // }
+</script> 
+{% endblock %}
